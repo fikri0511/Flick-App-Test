@@ -1,6 +1,7 @@
 package com.adapthink.flicktestapp.core.data
 
 import com.adapthink.flicktestapp.core.data.source.remote.network.ApiResponse
+import com.adapthink.flicktestapp.core.data.source.remote.response.ArticlesItem
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,9 +19,9 @@ abstract class  NetworkBoundResource<ResultType, RequestType>{
 
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 
-    protected abstract fun createCall(): Flowable<ApiResponse<RequestType>>
+    protected abstract fun createCall(): Flowable<ApiResponse<List<ArticlesItem>>>
 
-    protected abstract fun saveCallResult(data: RequestType)
+    protected abstract fun saveCallResult(data: List<ArticlesItem>)
 
     init {
         @Suppress("LeakingThis")

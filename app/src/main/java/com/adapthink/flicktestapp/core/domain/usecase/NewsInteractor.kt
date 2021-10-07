@@ -1,4 +1,7 @@
 package com.adapthink.flicktestapp.core.domain.usecase
 
-class NewsInteractor {
+import com.adapthink.flicktestapp.core.domain.repository.INewsRepository
+
+class NewsInteractor(private val iNewsRepository: INewsRepository) : NewsUsecase {
+    override fun getAllNews() = iNewsRepository.getAllNews()
 }
