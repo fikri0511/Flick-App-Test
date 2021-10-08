@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">FlickTestApp</string>
+    <string name="app_name">Flick Berita Olahraga</string>
+    <string name="image">image</string>
+    <string name="internet_bermasalah">Internet Bermasalah</string>
+    <string name="gambar">Gambar</string>
+    <string name="berita_seputar_olahraga">Berita Seputar Olahraga</string>
+    <string name="klik_disini">Selengkapnya</string>
 </resources>

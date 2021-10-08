@@ -12,26 +12,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 
-class RemoteDataSource private constructor(private val apiService: ApiService) {
-    companion object {
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(service: ApiService): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(service)
-            }
-    }
-
+class RemoteDataSource(private val apiService: ApiService) {
     @SuppressLint("CheckResult")
     fun getAllNews(): Flowable<ApiResponse<List<ArticlesItem>>> {
         val resultData = PublishSubject.create<ApiResponse<List<ArticlesItem>>>()
-
-        //get data from remote api
-        val client = apiService.getListNews("id", "health", API_KEY)
+        //get data news
+        val client = apiService.getListNews("id", "sports", API_KEY)
 
         client
-            .subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .take(1)
             .subscribe({ response ->

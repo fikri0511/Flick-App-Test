@@ -1,5 +1,6 @@
 package com.adapthink.flicktestapp.core.data
 
+import android.util.Log
 import com.adapthink.flicktestapp.core.data.source.remote.network.ApiResponse
 import com.adapthink.flicktestapp.core.data.source.remote.response.ArticlesItem
 import io.reactivex.BackpressureStrategy
@@ -12,7 +13,7 @@ import io.reactivex.subjects.PublishSubject
 abstract class  NetworkBoundResource<ResultType, RequestType>{
     private val result = PublishSubject.create<Resource<ResultType>>()
     private val mCompositeDisposable = CompositeDisposable()
-
+    private val TAG = "Networkd_Bound"
     protected open fun onFetchFailed() {}
 
     protected abstract fun loadFromDB(): Flowable<ResultType>
@@ -55,6 +56,7 @@ abstract class  NetworkBoundResource<ResultType, RequestType>{
             .subscribe { response ->
                 when (response) {
                     is ApiResponse.Success -> {
+                        Log.v(TAG, "On Success ${response.data}")
                         saveCallResult(response.data)
                         val dbSource = loadFromDB()
                         dbSource.subscribeOn(Schedulers.computation())
@@ -77,6 +79,7 @@ abstract class  NetworkBoundResource<ResultType, RequestType>{
                     }
                     is ApiResponse.Error -> {
                         onFetchFailed()
+                        Log.v(TAG, "On Failed ${response.errorMessage}")
                         result.onNext(Resource.Error(response.errorMessage, null))
                     }
                 }

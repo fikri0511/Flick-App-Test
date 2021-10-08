@@ -1,4 +1,4 @@
-package com.adapthink.flicktestapp
+package com.adapthink.flicktestapp.ui.main
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel

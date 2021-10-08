@@ -9,14 +9,13 @@ object DataMapper {
         val newsList = ArrayList<NewsEntity>()
         input.map {
             val news = NewsEntity(
-                title = it.title!!,
-                description = it.description!!,
-                publishedAt = it.publishedAt!!,
-//                author = it.author!!,
-                urlToImage = it.urlToImage!!,
-//                source = it.source!!,
-                url = it.url!!
-//                , content = it.content!!
+                title = it.title.toString(),
+                description = it.description.toString(),
+                publishedAt = it.publishedAt.toString(),
+                author = it.author.toString(),
+                urlToImage = it.urlToImage.toString(),
+                url = it.url.toString(),
+                content = it.content.toString()
             )
             newsList.add(news)
         }
@@ -26,25 +25,13 @@ object DataMapper {
     fun mapEntitiesToDomain(input: List<NewsEntity>): List<News> =
         input.map {
             News(
-                title = it.title!!,
-                description = it.description!!,
-                publishedAt = it.publishedAt!!,
-                author = it.author!!,
-                urlToImage = it.urlToImage!!,
-//                source = it.source!!,
-                url = it.url!!,
-                content = it.content!!
+                title = it.title,
+                description = it.description,
+                publishedAt = it.publishedAt,
+                author = it.author,
+                urlToImage = it.urlToImage,
+                url = it.url,
+                content = it.content
             )
         }
-
-    fun mapDomainToEntity(it: News) = NewsEntity(
-        title = it.title!!,
-        description = it.description!!,
-        publishedAt = it.publishedAt!!,
-        author = it.author!!,
-        urlToImage = it.urlToImage!!,
-//        source = it.source!!,
-        url = it.url!!,
-        content = it.content!!
-    )
 }

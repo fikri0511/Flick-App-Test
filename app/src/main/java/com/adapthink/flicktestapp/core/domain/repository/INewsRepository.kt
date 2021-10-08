@@ -5,7 +5,5 @@ import com.adapthink.flicktestapp.core.domain.model.News
 import io.reactivex.Flowable
 
 interface INewsRepository {
-
     fun getAllNews(): Flowable<Resource<List<News>>>
-
 }
